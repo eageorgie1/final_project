@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Web GIS Map</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <script type="module" src="https://js.arcgis.com/5.0/"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="panel">
+      <h2>GIS Control Panel</h2>
+
+      <button id="sofiaBtn">Go to Sofia</button>
+      <button id="plovdivBtn">Go to Plovdiv</button>
+      <button id="varnaBtn">Go to Varna</button>
+      <button id="resetBtn">Reset View</button>
+
+      <hr>
+
+      <button id="zoomInBtn">Zoom In</button>
+      <button id="zoomOutBtn">Zoom Out</button>
+
+      <hr>
+
+      <label>Choose Basemap:</label>
+
+      <select id="basemapSelect">
+        <option value="osm">OpenStreetMap</option>
+        <option value="topo">Topographic</option>
+      </select>
+
+      <hr>
+
+      <input type="text" id="cityInput" placeholder="Enter city">
+      <button id="searchBtn">Search city</button>
+
+      <hr>
+
+      <p id="status">Status: Ready</p>
+
+      <p id="coordinates">
+        Longitude: -, Latitude: -
+      </p>
+    </div>
+
+    <!-- ТОВА Е ВАЖНО -->
+    <arcgis-map
+      id="map"
+      basemap="osm"
+      center="25.4858,42.7339"
+      zoom="7">
+    </arcgis-map>
+
+  </div>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
