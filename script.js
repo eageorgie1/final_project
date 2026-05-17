@@ -8,7 +8,7 @@ const updateStatus = (message) => {
   statusText.textContent = `Status: ${message}`;
 };
 
-// градове (масив от обекти)
+// градове
 const cities = [
   { name: "Sofia", longitude: 23.3219, latitude: 42.6977, zoom: 12 },
   { name: "Plovdiv", longitude: 24.7453, latitude: 42.1354, zoom: 12 },
@@ -17,7 +17,7 @@ const cities = [
   { name: "Ruse", longitude: 25.9547, latitude: 43.8356, zoom: 12 }
 ];
 
-// функция за местене към град
+// функция за местене
 const goToCity = (city) => {
   mapElement.goTo({
     center: [city.longitude, city.latitude],
@@ -28,17 +28,9 @@ const goToCity = (city) => {
 };
 
 // бутони
-document.querySelector("#sofiaBtn").addEventListener("click", () => {
-  goToCity(cities[0]);
-});
-
-document.querySelector("#plovdivBtn").addEventListener("click", () => {
-  goToCity(cities[1]);
-});
-
-document.querySelector("#varnaBtn").addEventListener("click", () => {
-  goToCity(cities[2]);
-});
+document.querySelector("#sofiaBtn").addEventListener("click", () => goToCity(cities[0]));
+document.querySelector("#plovdivBtn").addEventListener("click", () => goToCity(cities[1]));
+document.querySelector("#varnaBtn").addEventListener("click", () => goToCity(cities[2]));
 
 document.querySelector("#resetBtn").addEventListener("click", () => {
   mapElement.goTo({
@@ -51,27 +43,22 @@ document.querySelector("#resetBtn").addEventListener("click", () => {
 
 // zoom
 document.querySelector("#zoomInBtn").addEventListener("click", () => {
-  mapElement.zoom = mapElement.zoom + 1;
+  mapElement.zoom++;
   updateStatus("Zoomed in");
 });
 
 document.querySelector("#zoomOutBtn").addEventListener("click", () => {
-  mapElement.zoom = mapElement.zoom - 1;
+  mapElement.zoom--;
   updateStatus("Zoomed out");
 });
 
-// смяна на basemap
+// basemap
 document.querySelector("#basemapSelect").addEventListener("change", (event) => {
-  if (event.target.value === "osm") {
-    mapElement.basemap = "osm";
-  } else {
-    mapElement.basemap = "topo";
-  }
-
+  mapElement.basemap = event.target.value;
   updateStatus("Basemap changed");
 });
 
-// click координати
+// координати при клик
 mapElement.addEventListener("arcgisViewClick", (event) => {
   const mapPoint = event.detail.mapPoint;
 
@@ -82,13 +69,30 @@ mapElement.addEventListener("arcgisViewClick", (event) => {
   updateStatus("Coordinates selected");
 });
 
-// търсене на град
+// 🔥 ТЪРСЕНЕ (кирилица + латиница)
 document.querySelector("#searchBtn").addEventListener("click", () => {
   const input = document.querySelector("#cityInput").value.trim().toLowerCase();
 
-  const foundCity = cities.find(
-    city => city.name.toLowerCase() === input
-  );
+  const cityNames = {
+    "sofia": "Sofia",
+    "софия": "Sofia",
+
+    "plovdiv": "Plovdiv",
+    "пловдив": "Plovdiv",
+
+    "varna": "Varna",
+    "варна": "Varna",
+
+    "burgas": "Burgas",
+    "бургас": "Burgas",
+
+    "ruse": "Ruse",
+    "русе": "Ruse"
+  };
+
+  const cityName = cityNames[input];
+
+  const foundCity = cities.find(city => city.name === cityName);
 
   if (foundCity) {
     goToCity(foundCity);
