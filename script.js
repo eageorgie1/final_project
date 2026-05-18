@@ -10,11 +10,11 @@ const updateStatus = (message) => {
 
 // градове
 const cities = [
-  { name: "Sofia", longitude: 23.3219, latitude: 42.6977, zoom: 12 },
-  { name: "Plovdiv", longitude: 24.7453, latitude: 42.1354, zoom: 12 },
-  { name: "Varna", longitude: 27.9147, latitude: 43.2141, zoom: 12 },
-  { name: "Burgas", longitude: 27.4678, latitude: 42.5048, zoom: 12 },
-  { name: "Ruse", longitude: 25.9547, latitude: 43.8356, zoom: 12 }
+  { name: "Sofia", longitude: 23.3219, latitude: 42.6977, zoom: 13 },
+  { name: "Plovdiv", longitude: 24.7453, latitude: 42.1354, zoom: 14 },
+  { name: "Varna", longitude: 27.9147, latitude: 43.2141, zoom: 14 },
+  { name: "Burgas", longitude: 27.4678, latitude: 42.5048, zoom: 15 },
+  { name: "Ruse", longitude: 25.9547, latitude: 43.8356, zoom: 14 }
 ];
 
 // функция за местене
