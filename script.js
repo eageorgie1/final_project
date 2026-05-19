@@ -18,8 +18,8 @@ const cities = [
 ];
 
 // функция за местене
-const goToCity = (city) => {
-  mapElement.goTo({
+const goToCity = async (city) => {
+  await mapElement.goTo({
     center: [city.longitude, city.latitude],
     zoom: city.zoom
   });
